@@ -14,12 +14,13 @@ class _MyLoginPageState extends State<MyLoginPage> {
   final TextEditingController _passwordController = TextEditingController();
   String email = "deneme@email.com";
   String password = "123";
+  bool isVisibility = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(2, 137, 123, 1),
+        backgroundColor: myPrimaryColor,
         elevation: 0,
         title: Text(
           "Giriş Yap",
@@ -47,17 +48,23 @@ class _MyLoginPageState extends State<MyLoginPage> {
                         return !emailValid ? "Geçerli bir email giriniz" : null;
                       },
                       decoration: InputDecoration(
-                          hintText: "Email giriniz",
-                          border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
-                          prefixIcon: Icon(Icons.email)),
+                        hintText: "Email giriniz",
+                        border: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10))),
+                        prefixIcon: Icon(Icons.email),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(16),
+                            borderSide: BorderSide(color: myPrimaryColor)),
+                      ),
                     ),
                     SizedBox(
                       height: 12,
                     ),
                     // commit
                     TextFormField(
+                      obscureText: !isVisibility,
+                      obscuringCharacter: "*",
                       validator: (value) {
                         if (password == value) {
                           return null;
@@ -65,11 +72,25 @@ class _MyLoginPageState extends State<MyLoginPage> {
                         return "Lütfen şifreyi doğru girin";
                       },
                       decoration: InputDecoration(
-                          hintText: "Şifre giriniz",
-                          border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
-                          prefixIcon: Icon(Icons.lock)),
+                        hintText: "Şifre giriniz",
+                        border: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10))),
+                        prefixIcon: Icon(Icons.lock),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(16),
+                            borderSide: BorderSide(color: myPrimaryColor)),
+                        suffixIcon: InkWell(
+                          onTap: () {
+                            setState(() {
+                              isVisibility = !isVisibility;
+                            });
+                          },
+                          child: Icon(isVisibility == true
+                              ? Icons.visibility
+                              : Icons.visibility_off),
+                        ),
+                      ),
                     ),
                     SizedBox(
                       height: 20,
@@ -79,7 +100,7 @@ class _MyLoginPageState extends State<MyLoginPage> {
                       height: 45,
                       child: OutlinedButton(
                           style: OutlinedButton.styleFrom(
-                              backgroundColor: Color.fromRGBO(2, 137, 123, 1),
+                              backgroundColor: myPrimaryColor,
                               shape: StadiumBorder()),
                           onPressed: () {
                             if (!_formKey.currentState!.validate()) {
@@ -96,7 +117,7 @@ class _MyLoginPageState extends State<MyLoginPage> {
 
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                 duration: Duration(milliseconds: 1500),
-                                backgroundColor: Colors.green,
+                                backgroundColor: myPrimaryColor,
                                 content: Text(
                                   textAlign: TextAlign.center,
                                   "Giriş yapıldı",
@@ -107,7 +128,13 @@ class _MyLoginPageState extends State<MyLoginPage> {
                             "Giriş Yap",
                             style: TextStyle(color: Colors.white, fontSize: 16),
                           )),
-                    )
+                    ),
+                    TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          "Hesabın yok mu? Kayıt ol",
+                          style: TextStyle(color: myPrimaryColor),
+                        ))
                   ],
                 ),
               ),
@@ -118,3 +145,5 @@ class _MyLoginPageState extends State<MyLoginPage> {
     );
   }
 }
+
+const Color myPrimaryColor = Color.fromRGBO(2, 137, 123, 1);
