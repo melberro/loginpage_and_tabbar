@@ -1,4 +1,4 @@
-# loginPage_registerPage
+# LoginPage_RegisterPage
 
 A new Flutter project.
 
