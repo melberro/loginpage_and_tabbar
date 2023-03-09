@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mart_8_ornekler/register_page.dart';
+import 'package:mart_8_ornekler/login_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: false,
         primarySwatch: Colors.green,
       ),
-      home: const MyRegisterPage(),
+      home: const MyLoginPage(),
     );
   }
 }

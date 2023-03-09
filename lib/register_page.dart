@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:mart_8_ornekler/login_page.dart';
 
 class MyRegisterPage extends StatefulWidget {
   const MyRegisterPage({super.key});
@@ -157,7 +156,7 @@ class _MyRegisterPageState extends State<MyRegisterPage> {
                           style: OutlinedButton.styleFrom(
                               backgroundColor: myPrimaryColor,
                               shape: const StadiumBorder()),
-                          onPressed: () {
+                          onPressed: () async {
                             if (!_formKey.currentState!.validate()) {
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(const SnackBar(
@@ -168,7 +167,7 @@ class _MyRegisterPageState extends State<MyRegisterPage> {
                                       )));
                               return;
                             }
-
+                            Navigator.pop(context);
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(const SnackBar(
                                     backgroundColor: myPrimaryColor,
@@ -184,10 +183,7 @@ class _MyRegisterPageState extends State<MyRegisterPage> {
                     ),
                     TextButton(
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MyLoginPage()));
+                          Navigator.pop(context);
                         },
                         child: const Text(
                           "Zaten bir hesabın var mı? Giriş yap",

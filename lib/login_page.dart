@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:mart_8_ornekler/register_page.dart';
+import 'package:mart_8_ornekler/tab_subwidgets/home.dart';
 
 class MyLoginPage extends StatefulWidget {
   const MyLoginPage({super.key});
@@ -114,15 +116,17 @@ class _MyLoginPageState extends State<MyLoginPage> {
                                       )));
                               return;
                             }
-
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                duration: Duration(milliseconds: 1500),
-                                backgroundColor: myPrimaryColor,
-                                content: Text(
-                                  textAlign: TextAlign.center,
-                                  "Giriş yapıldı",
-                                  style: TextStyle(color: Colors.white),
-                                )));
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const HomePage()));
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                                    backgroundColor: myPrimaryColor,
+                                    content: Text(
+                                      "Tebrikler giriş yapıldı",
+                                      style: TextStyle(color: Colors.white),
+                                    )));
                           },
                           child: Text(
                             "Giriş Yap",
@@ -130,7 +134,13 @@ class _MyLoginPageState extends State<MyLoginPage> {
                           )),
                     ),
                     TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const MyRegisterPage()));
+                        },
                         child: Text(
                           "Hesabın yok mu? Kayıt ol",
                           style: TextStyle(color: myPrimaryColor),
